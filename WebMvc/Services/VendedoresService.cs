@@ -21,5 +21,12 @@ namespace WebMvc.Services
         {
             return _context.Vendedores.ToList();
         }
+
+        //Método para inserir novo vendedor no BD
+        public void Insert(Vendedores obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
