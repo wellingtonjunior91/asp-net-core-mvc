@@ -28,5 +28,19 @@ namespace WebMvc.Services
             _context.Add(obj);
             _context.SaveChanges();
         }
+        
+        //Método para retornar vendedor por Id
+        public Vendedores FindById(int id)
+        {
+            return _context.Vendedores.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        //Remover vendedor do BD
+        public void Remover(int id)
+        {
+            var obj = _context.Vendedores.Find(id);
+            _context.Vendedores.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }

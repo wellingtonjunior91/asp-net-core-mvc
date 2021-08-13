@@ -39,5 +39,31 @@ namespace WebMvc.Controllers
             _vendedoresService.Insert(vendedores);
             return RedirectToAction(nameof(Index));
         }
+
+        //Açao para recuperar o Id e enviar para a View
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedoresService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        //Ação para efetuar a deleção no BD
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _vendedoresService.Remover(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
