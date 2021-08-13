@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebMvc.Services
 {
@@ -32,7 +33,7 @@ namespace WebMvc.Services
         //Método para retornar vendedor por Id
         public Vendedores FindById(int id)
         {
-            return _context.Vendedores.FirstOrDefault(obj => obj.Id == id);
+            return _context.Vendedores.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         //Remover vendedor do BD

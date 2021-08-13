@@ -25,6 +25,8 @@ namespace WebMvc.Controllers
             var list = _vendedoresService.FindAll();
             return View(list);
         }
+
+        //Ação para pegar todos departamentos e enviar para a view
         public IActionResult Create()
         {
             var departamentos = _departamentoService.FindAll();
@@ -32,6 +34,7 @@ namespace WebMvc.Controllers
             return View(viewModel);
         }
 
+        //Ação para criar um novo vendedor
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Vendedores vendedores)
@@ -64,6 +67,22 @@ namespace WebMvc.Controllers
         {
             _vendedoresService.Remover(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedoresService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
         }
     }
 }
