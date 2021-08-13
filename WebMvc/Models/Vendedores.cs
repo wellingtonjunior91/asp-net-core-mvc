@@ -12,6 +12,7 @@ namespace WebMvc.Models
         public DateTime DataAniversario { get; set; }
         public double Salario { get; set; }
         public Departamento Departamento { get; set; }
+        public int DepartamentoId { get; set; }
         public ICollection<RegistroDeVendas> Vendas { get; set; } = new List<RegistroDeVendas>();
 
         //Construtores (OBS: Não utilizar atributos com coleções)
