@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
 using Microsoft.EntityFrameworkCore;
+using WebMvc.Services.Exceptions;
 
 namespace WebMvc.Services
 {
@@ -42,6 +43,24 @@ namespace WebMvc.Services
             var obj = _context.Vendedores.Find(id);
             _context.Vendedores.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Vendedores obj)
+        {
+            if (!_context.Vendedores.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

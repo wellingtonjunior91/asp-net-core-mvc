@@ -1,7 +1,7 @@
 ﻿@model WebMvc.Models.ViewModels.VendedorFormViewModel
 
 @{
-    ViewData["Title"] = "Criar novo";
+    ViewData["Title"] = "Editar";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -11,7 +11,8 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Vendedores.Id" />
             <div class="form-group">
                 <label asp-for="Vendedores.Nome" class="control-label"></label>
                 <input asp-for="Vendedores.Nome" class="form-control" />
@@ -30,11 +31,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Vendedores.DepartamentoId" class="control-label"></label>
-                <select asp-for="Vendedores.DepartamentoId" asp-items="@(new SelectList(Model.Departamento, "Id","Nome"))"class="form-control"></select>
+                <select asp-for="Vendedores.DepartamentoId" asp-items="@(new SelectList(Model.Departamento, "Id","Nome"))" class="form-control"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-default" /> 
-                <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                <input type="submit" value="Salvar" class="btn btn-default" /> |
+                <a asp-action="Index">Voltar para a listagem</a>
             </div>
         </form>
     </div>
